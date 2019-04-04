@@ -39,15 +39,16 @@ public class Carrera {
         circuito = sc.nextLine();
         System.out.print("Poblacion: ");
         poblacion = sc.nextLine();
-        System.out.print("--Fecha--\n Dia: ");
+        System.out.print("-Fecha-\n Dia: ");
         dia = sc.nextInt();
-        System.out.print("Mes: ");
+        System.out.print(" Mes: ");
         mes = sc.nextInt();
-        System.out.print("Anno: ");
+        System.out.print(" Anno: ");
         anno = sc.nextInt();
         fecha = new Date(anno,mes,dia);
-        System.out.print("Distancia: ");
+        System.out.print("--------\nDistancia: ");
         distancia = sc.nextFloat();
+        System.out.println("-----------------------------------------------");
     }
     
     public String toString(){

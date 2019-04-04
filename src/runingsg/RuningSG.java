@@ -20,8 +20,14 @@ public class RuningSG {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Scanner sc = new Scanner(System.in);
-        System.out.println(sc.nextInt());
+        Carrera runingSG = new Carrera(true);
+        runingSG.setInfoCarrera();
+        do{
+            runingSG.introducirCorredor();
+            System.out.print("Desea introducir otro corredor");
+        }while(siNo());
+        System.out.println("-----------------------------------------------");
+        System.out.println(runingSG.toString());
     }
     
     public static boolean siNo(){
