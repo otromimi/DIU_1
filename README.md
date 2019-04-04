@@ -1,2 +1,2 @@
-# DIU_1
+# PED_1
 Practica de listas enlazadas
