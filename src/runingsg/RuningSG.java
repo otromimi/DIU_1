@@ -20,14 +20,20 @@ public class RuningSG {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Carrera runingSG = new Carrera(true);
+        Carrera runingSG = new Carrera(false);
+        proof();
         runingSG.setInfoCarrera();
         do{
             runingSG.introducirCorredor();
             System.out.print("Desea introducir otro corredor");
         }while(siNo());
+        runingSG.deltaTime();
         System.out.println("-----------------------------------------------");
         System.out.println(runingSG.toString());
+        System.out.println("\n__________________________________________________\nNombre\t\tTiempo\t\tDiferencia");
+        while(!runingSG.getListas().esVacia()){
+            System.out.print(runingSG.getListas().desencolar().toString());
+        }
     }
     
     public static boolean siNo(){
@@ -66,6 +72,12 @@ public class RuningSG {
         Scanner scan =new Scanner(System.in);
         System.out.print("Presione intro para continuar...");
         scan.nextLine();
+    }
+    
+    private static void proof(){
+        String pepe = new String("comodore");
+        System.out.println(pepe.getClass()==String.class);
+        
     }
     
 }

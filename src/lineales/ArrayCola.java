@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Implementacion de la cola mediante arrays estaticos circulares
  */
 package lineales;
 
@@ -11,38 +9,46 @@ import modelos.Cola;
  *
  * @author Liam
  */
-public class ArrayCola<E> implements Cola {
+public class ArrayCola<T> implements Cola<T>, Cloneable {
     private int primero, fin, talla;
-    private static final int TAMANNO_DEFECTO = 8;
-    private E arrayCola[];
+    private static final int TAMANNO_DEFECTO = 2;
+    private T arrayCola[];
     
     public ArrayCola(){
         primero=0;//cabeza de la cola
-        fin=0;//referencia a la ultima casilla ocupada
+        fin=0;//referencia a la primera csilla sin ocupar
         talla=0;//numero de elementos introducidos
-        arrayCola = (E[]) new Object[TAMANNO_DEFECTO];
+        arrayCola = (T[]) new Object[TAMANNO_DEFECTO];
     }
 
+    /**
+     *
+     * @param contenido
+     */
     @Override
-    public void encolar(Object contenido) {
-        if(talla==arrayCola.length)
+    public void encolar(T contenido) {
+        if(talla==arrayCola.length){
             redimensionar();
-        arrayCola[fin+1]=(E)contenido;
+        }
+        arrayCola[fin]=contenido;
         talla++;  
+        fin=(fin+1)%(arrayCola.length);
     }
-
+    
     @Override
-    public E desencolar() {
+    public T desencolar() {
+        T aux;
         if(talla>0){
             talla--;
-            primero++;
-            return arrayCola[primero-1];
+            aux=arrayCola[primero];
+            primero=(primero+1)%(arrayCola.length);
+            return aux;
         }else
             return null;
     }
 
     @Override
-    public E primero() {
+    public T primero() {
         return arrayCola[primero];
     }
 
@@ -52,13 +58,15 @@ public class ArrayCola<E> implements Cola {
     }
     
     private void redimensionar(){
-        E aux[] = (E[])new Object[arrayCola.length*2];
-        for(int j=0, i=primero;(i%arrayCola.length)!=fin;i++,j++){
-            aux[j]=arrayCola[i%arrayCola.length];
+        T aux[] = (T[])new Object[arrayCola.length*2];
+        int finAux;
+        finAux=(fin==0)?arrayCola.length:fin-1;
+        for(int j=0, i=primero;i!=(finAux);i=(i+1)%(arrayCola.length+1),j++){
+            aux[j]=arrayCola[i];
         }
         arrayCola=aux;
         primero=0;
-        fin=talla-1;
+        fin=talla;
     }
-    
+
 }

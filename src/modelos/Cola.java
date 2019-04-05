@@ -9,9 +9,10 @@ package modelos;
  *
  * @author Liam
  */
-public interface Cola<E> {
-    public void encolar(E contenido);
-    public E desencolar();
-    public E primero();
-    public boolean esVacia();
+public interface Cola<T> {
+    
+    T desencolar();
+    T primero();
+    boolean esVacia();
+    void encolar(T contenido);
 }

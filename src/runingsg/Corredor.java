@@ -22,10 +22,10 @@ public class Corredor {
         
         System.out.print("---------------------------------\nNombre: ");
         corredor = sc.nextLine();
-        System.out.print("Tiempo en segundos: ");
+        System.out.print("Tiempo en minutos: ");
         tiempo = sc.nextFloat();
-        System.out.print("Diferencia en segundos: ");
-        delta = sc.nextFloat();
+        //System.out.print("Diferencia en minutos: ");
+        delta = 0;
     }
     
     public Corredor(String name, float time, float diferencial){
@@ -35,7 +35,7 @@ public class Corredor {
     }
     
     public String toString(){
-        return (corredor+"\t"+Float.toString(tiempo)+"\t"+Float.toString(delta)+"\n");
+        return (corredor+"\t\t"+Float.toString(tiempo)+"\t\t"+Float.toString(delta)+"\n");
     }
     
     public String getNombre() {
@@ -48,5 +48,9 @@ public class Corredor {
 
     public float getDelta() {
         return delta;
+    }
+    
+    public void setDelta(float delta) {
+        this.delta=delta;
     }
 }

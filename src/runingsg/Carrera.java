@@ -6,7 +6,7 @@
 package runingsg;
 
 import java.util.Date;
-import java.util.Scanner;
+import java.util.Scanner; 
 import lineales.ArrayCola;
 import lineales.LECola;
 import modelos.Cola;
@@ -25,9 +25,9 @@ public class Carrera {
      
     public Carrera(boolean statico){
         if(statico)
-            listas = new ArrayCola();
+            listas = new ArrayCola<>();
         else
-            listas = new LECola();
+            listas = new LECola<>();
     }
     
     public void setInfoCarrera(){
@@ -46,16 +46,67 @@ public class Carrera {
         System.out.print(" Anno: ");
         anno = sc.nextInt();
         fecha = new Date(anno,mes,dia);
-        System.out.print("--------\nDistancia: ");
+        System.out.print("--------\nDistancia(Km): ");
         distancia = sc.nextFloat();
-        System.out.println("-----------------------------------------------");
+        
     }
     
     public String toString(){
-        return("Circuito: "+circuito+"\nPoblacion: "+poblacion+"\nFecha: "+fecha.toString()+"\nDistancia: "+Float.toString(distancia)+"\n\n_________________________________________________________________________________________________________\n");
+        return("Circuito: "+circuito+"\nPoblacion: "+poblacion+"\nFecha: "+fecha.toString()+"\nDistancia: "+Float.toString(distancia)+" Km\n");
     }
     
     public void introducirCorredor(){
         listas.encolar(new Corredor());
+    }
+    
+    public Cola getListas() {
+        return listas;
+    }
+    
+    private float getMejorTiempo(){
+        float best=-1;
+        Cola<Corredor> clone;
+        clone=(listas.getClass()==ArrayCola.class)?new ArrayCola<>(): new LECola<>();
+        while(!listas.esVacia()){
+            if(listas.primero().getTiempo()<best)
+                best=listas.primero().getTiempo();
+            clone.encolar(listas.desencolar());
+        }
+        listas=clone;
+        return best;
+    }
+    
+    public void deltaTime(){
+        float best=getMejorTiempo();
+        Cola<Corredor> actualizada;
+        actualizada=(listas.getClass()==ArrayCola.class)?new ArrayCola<>(): new LECola<>();
+        while(!listas.esVacia()){
+            listas.primero().setDelta(listas.primero().getTiempo()-best);
+            actualizada.encolar(listas.desencolar());
+        }
+        listas=actualizada;
+    }
+    
+    public void ordenar(){
+        Cola<Corredor> aux, tidy;
+        aux=(listas.getClass()==ArrayCola.class)?new ArrayCola<>(): new LECola<>();
+        tidy=(listas.getClass()==ArrayCola.class)?new ArrayCola<>(): new LECola<>();
+        Corredor less;
+        while((!listas.esVacia())||(!aux.esVacia())){
+            less=listas.primero();
+            while(!listas.esVacia()){
+                if(listas.primero().getDelta()<less.getDelta()){
+                    less=listas.primero();
+                }
+                aux.encolar(listas.desencolar());
+            }
+            tidy.encolar(less);
+            while(!aux.esVacia()){
+                if(aux.primero().equals(less))
+                    aux.desencolar();
+                else
+                    listas.encolar(aux.desencolar());   
+            }
+        }
     }
 }
