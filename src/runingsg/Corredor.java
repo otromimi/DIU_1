@@ -20,7 +20,7 @@ public class Corredor {
     public Corredor(){
         Scanner sc = new Scanner(System.in);
         
-        System.out.print("---------------------------------\nNombre: ");
+        System.out.print("---------------------------------------\nNombre: ");
         corredor = sc.nextLine();
         System.out.print("Tiempo en minutos: ");
         tiempo = sc.nextFloat();

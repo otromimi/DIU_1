@@ -52,7 +52,7 @@ public class Carrera {
     }
     
     public String toString(){
-        return("Circuito: "+circuito+"\nPoblacion: "+poblacion+"\nFecha: "+fecha.toString()+"\nDistancia: "+Float.toString(distancia)+" Km\n");
+        return("Circuito: "+circuito+"\nPoblacion: "+poblacion+"\nFecha: "+fecha.toString()+"\nDistancia: "+Float.toString(distancia)+" Km");
     }
     
     public void introducirCorredor(){
@@ -64,14 +64,14 @@ public class Carrera {
     }
     
     private float getMejorTiempo(){
-        float best=-1;
+        float best=listas.primero().getTiempo();
         Cola<Corredor> clone;
         clone=(listas.getClass()==ArrayCola.class)?new ArrayCola<>(): new LECola<>();
-        while(!listas.esVacia()){
+        do{
             if(listas.primero().getTiempo()<best)
                 best=listas.primero().getTiempo();
             clone.encolar(listas.desencolar());
-        }
+        }while(!listas.esVacia());
         listas=clone;
         return best;
     }
@@ -108,5 +108,19 @@ public class Carrera {
                     listas.encolar(aux.desencolar());   
             }
         }
+        listas=tidy;
+    }
+    
+    public void printListas(boolean copy){
+        Cola<Corredor> aux=(listas.getClass()==ArrayCola.class)?new ArrayCola<>(): new LECola<>();
+        while(!listas.esVacia()){
+            System.out.print(listas.primero().toString());
+            if(copy)
+                aux.encolar(listas.desencolar());
+            else
+                listas.desencolar();
+        }
+        if(copy)
+            listas=aux;
     }
 }

@@ -6,8 +6,6 @@
 package runingsg;
 
 import java.util.Scanner;
-import lineales.ArrayCola;
-import modelos.Cola;
 
 /**
  *
@@ -19,21 +17,29 @@ public class RuningSG {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        Carrera runingSG = new Carrera(false);
-        proof();
+        // lanza ambas implementaciones depende del usuario.
+        Carrera runingSG;
+        
+        System.out.print("Si se introduce \"si\" se ejecutara en programa con la implementacion descrita en la practica 1A en memoria estatica; "
+                + "de lo cantrario la implementacion sera la descrita en la practica 1B, con memoria dinamica.\n\n\tDesea correr la implementacion"
+                + " en memoria estatica");
+        runingSG= new Carrera(siNo());
+        System.out.print("\n######################################################################\n\n\n");
         runingSG.setInfoCarrera();
+        
         do{
             runingSG.introducirCorredor();
             System.out.print("Desea introducir otro corredor");
         }while(siNo());
-        runingSG.deltaTime();
-        System.out.println("-----------------------------------------------");
-        System.out.println(runingSG.toString());
-        System.out.println("\n__________________________________________________\nNombre\t\tTiempo\t\tDiferencia");
-        while(!runingSG.getListas().esVacia()){
-            System.out.print(runingSG.getListas().desencolar().toString());
-        }
+        
+        printInfo(runingSG,true);
+        System.out.println();
+        runingSG.ordenar();//Ordenacion de las desta del tiempo.
+        pressToContinue();
+        
+        printInfo(runingSG,false);
+        System.out.println();
+        pressToContinue();
     }
     
     public static boolean siNo(){
@@ -74,10 +80,13 @@ public class RuningSG {
         scan.nextLine();
     }
     
-    private static void proof(){
-        String pepe = new String("comodore");
-        System.out.println(pepe.getClass()==String.class);
-        
+    
+    private static void printInfo(Carrera runingSG, boolean copy){
+        runingSG.deltaTime();
+        System.out.println("\n\n__________________________________________________");
+        System.out.println(runingSG.toString());
+        System.out.println("__________________________________________________\nNombre\t\tTiempo\t\tDiferencia");
+        runingSG.printListas(copy);
     }
     
 }
