@@ -6,7 +6,7 @@
 package lineales;
 
 /**
- *
+ *Nodo perteneciente a la lista enlazada, en este caso lista enlazada circular.
  * @author Liam
  */
 public class Nodo<T> {

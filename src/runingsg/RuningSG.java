@@ -20,8 +20,8 @@ public class RuningSG {
         // lanza ambas implementaciones depende del usuario.
         Carrera runingSG;
         
-        System.out.print("Si se introduce \"si\" se ejecutara en programa con la implementacion descrita en la practica 1A en memoria estatica; "
-                + "de lo cantrario la implementacion sera la descrita en la practica 1B, con memoria dinamica.\n\n\tDesea correr la implementacion"
+        System.out.print("Si se introduce \"si\" se ejecutara en programa con la implementacion descrita en la practica 1A en memoria estatica.\n"
+                + "De lo cantrario la implementacion sera la descrita en la practica 1B, con memoria dinamica.\n\n\tDesea correr la implementacion"
                 + " en memoria estatica");
         runingSG= new Carrera(siNo());
         System.out.print("\n######################################################################\n\n\n");
@@ -42,6 +42,10 @@ public class RuningSG {
         pressToContinue();
     }
     
+    /**
+     * Si se introcuce "s" o enter debuelbe true y "n" false.
+     * @return boolean
+     */
     public static boolean siNo(){
         Scanner scan =new Scanner(System.in);
         String input=null;
@@ -80,12 +84,16 @@ public class RuningSG {
         scan.nextLine();
     }
     
-    
+    /**
+     * Imprime la informacion sobre los datos de la carrera.
+     * @param runingSG
+     * @param copy 
+     */
     private static void printInfo(Carrera runingSG, boolean copy){
         runingSG.deltaTime();
         System.out.println("\n\n__________________________________________________");
         System.out.println(runingSG.toString());
-        System.out.println("__________________________________________________\nNombre\t\tTiempo\t\tDiferencia");
+        System.out.println("__________________________________________________\nNombre\t\tTiempo\t\tDiferencia\n");
         runingSG.printListas(copy);
     }
     

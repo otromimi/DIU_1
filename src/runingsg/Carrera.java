@@ -30,6 +30,9 @@ public class Carrera {
             listas = new LECola<>();
     }
     
+    /***
+     * Facilita la introduccion de la informacion del circuito al usuario.
+     */
     public void setInfoCarrera(){
         
         Scanner sc = new Scanner(System.in);
@@ -55,6 +58,9 @@ public class Carrera {
         return("Circuito: "+circuito+"\nPoblacion: "+poblacion+"\nFecha: "+fecha.toString()+"\nDistancia: "+Float.toString(distancia)+" Km");
     }
     
+    /**
+     * Añade un corredor a las listas.
+     */
     public void introducirCorredor(){
         listas.encolar(new Corredor());
     }
@@ -63,6 +69,10 @@ public class Carrera {
         return listas;
     }
     
+    /***
+     * Coge y debuelve el mejor tiempo de la cola de corredores haciendo una copia de esta para no perderla.
+     * @return float: corredor con el tiempo mas bajo.
+     */
     private float getMejorTiempo(){
         float best=listas.primero().getTiempo();
         Cola<Corredor> clone;
@@ -76,6 +86,9 @@ public class Carrera {
         return best;
     }
     
+    /**
+     * Calcula las diferencias de tiempos respecto al corredor mas veloz.
+     */
     public void deltaTime(){
         float best=getMejorTiempo();
         Cola<Corredor> actualizada;
@@ -87,6 +100,11 @@ public class Carrera {
         listas=actualizada;
     }
     
+    /**
+     * Ordena las listas de los corredores por diferencias de tiempos.
+     * Para el algoritmo de ordenacion el metodo solo hace uso de colas.
+     * @pre Necesita las diferencias de tiempo para poder ordenar.
+     */
     public void ordenar(){
         Cola<Corredor> aux, tidy;
         aux=(listas.getClass()==ArrayCola.class)?new ArrayCola<>(): new LECola<>();
@@ -111,6 +129,10 @@ public class Carrera {
         listas=tidy;
     }
     
+    /**
+     * Imprime las listas de los corredores.
+     * @param copy true si se quiere conservar la cola tras la impresion.
+     */
     public void printListas(boolean copy){
         Cola<Corredor> aux=(listas.getClass()==ArrayCola.class)?new ArrayCola<>(): new LECola<>();
         while(!listas.esVacia()){

@@ -6,12 +6,12 @@ package lineales;
 import modelos.Cola;
 
 /**
- *
+ *Implementacion de la cola en memoria estatica.
  * @author Liam
  */
 public class ArrayCola<T> implements Cola<T>, Cloneable {
     private int primero, fin, talla;
-    private static final int TAMANNO_DEFECTO = 2;
+    private static final int TAMANNO_DEFECTO = 2;//Tamaño inicial o por defecto del array.
     private T arrayCola[];
     
     public ArrayCola(){
@@ -21,10 +21,6 @@ public class ArrayCola<T> implements Cola<T>, Cloneable {
         arrayCola = (T[]) new Object[TAMANNO_DEFECTO];
     }
 
-    /**
-     *
-     * @param contenido
-     */
     @Override
     public void encolar(T contenido) {
         if(talla==arrayCola.length){
@@ -57,6 +53,9 @@ public class ArrayCola<T> implements Cola<T>, Cloneable {
         return (talla==0);
     }
     
+    /***
+     * Multiplica el array por dos y copia el contenido del antiguo.
+     */
     private void redimensionar(){
         T aux[] = (T[])new Object[arrayCola.length*2];
         int finAux;

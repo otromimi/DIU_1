@@ -6,9 +6,8 @@ package lineales;
 import modelos.Cola;
 
 /**
- *
+ *Implementacion de la cola en memoria dinamica, mediante un array circular.
  * @author Liam
- * @param <T>
  */
 public class LECola<T> implements Cola<T>{
     
@@ -20,6 +19,7 @@ public class LECola<T> implements Cola<T>{
         ultimo=null;
     }
     
+    @Override
     public void encolar(T contenido) {
         
         Nodo aux;
@@ -57,11 +57,13 @@ public class LECola<T> implements Cola<T>{
     }
 
     
+    @Override
     public T primero() {
         return (T) ultimo.siguiente.contenido;
     }
 
     
+    @Override
     public boolean esVacia() {
         return (talla==0);
     }
